@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\icon_navigation_drawer.png",
+        "source": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\src\\main\\res\\drawable-hdpi\\icon_navigation_drawer.png"
+    },
+    {
+        "merged": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\icon_search_off.png",
+        "source": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\src\\main\\res\\drawable-hdpi\\icon_search_off.png"
+    },
+    {
+        "merged": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\icon_search_on.png",
+        "source": "D:\\my.stuff\\google_drive\\dev_workspace\\android_workspace\\notifier\\app\\src\\main\\res\\drawable-hdpi\\icon_search_on.png"
+    }
+]

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:padding="2dip" >
+
+    <!-- Left side Frame -->
+    <include
+        android:id="@+id/author_picture_layout_frame"
+        layout="@layout/author_picture_view" />
+
+    <!-- Right side Frame -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/author_picture_layout_frame"
+        android:padding="2dip" >
+
+        <!-- Author Name -->
+        <TextView
+            android:id="@+id/app_item_detail_view_author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="4dp"
+            android:background="@drawable/cell_shape_default_round_blue"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="4dp"
+            android:text="@string/loading"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <!-- Item Date -->
+        <TextView
+            android:id="@+id/app_item_detail_view_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_item_detail_view_author_name"
+            android:layout_margin="4dp"
+            android:background="@drawable/cell_shape_default_round_white"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="4dp"
+            android:text="@string/item_date"
+            android:textSize="14sp"
+            android:textStyle="italic" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

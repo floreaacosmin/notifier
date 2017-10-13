@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right|center_vertical"
+    android:layout_margin="5dp"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:weightSum="10" >
+    
+    <EditText
+        android:id="@+id/actionbar_view_search_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/cell_shape_default_round_white"
+        android:ellipsize="end"
+        android:hint="@string/search_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="textFilter"
+        android:maxLength="20"
+        android:focusableInTouchMode="true"
+        android:padding="5dp"
+        android:maxLines="1"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible"
+        android:layout_weight="7" />
+
+    <CheckBox
+        android:id="@+id/actionbar_view_search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:button="@drawable/icon_search_toggle_background"
+        android:contentDescription="@null"
+        android:layout_weight="3" />
+
+</LinearLayout>

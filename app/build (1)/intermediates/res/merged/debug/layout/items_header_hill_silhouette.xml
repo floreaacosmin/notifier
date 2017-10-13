@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+    	Negative bottom layout margin for the building headers view 
+        in order to	compensate the ListView divider height. 
+    -->
+
+    <ImageView
+        android:id="@+id/app_items_view_header_hill_back"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/authors_header_height_third"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-12dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/hill_back_day" />
+
+    <ImageView
+        android:id="@+id/app_items_view_header_hill_front"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/authors_header_height_third"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-12dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/hill_front_day" />
+
+    <!-- The article view case detail text -->
+    <TextView
+        android:id="@+id/app_items_view_header_logo_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="4dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+
+        android:typeface="sans"
+        android:visibility="visible" />
+
+    <include layout="@layout/app_progress_bar" />
+
+</merge>

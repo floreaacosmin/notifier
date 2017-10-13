@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
+        android:id="@+id/app_item_detail_view_parallax_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:inner_parallax_factor="1.5"
+        app:parallax_factor="1.5"
+        app:parallax_views_num="2" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <!-- Item header view, containing the title -->
+            <include layout="@layout/item_detail_header_view" />
+
+            <!-- Author about view, including the picture -->
+            <include layout="@layout/item_detail_author_about" />
+
+            <!-- Item Content -->
+            <WebView
+                android:id="@+id/app_item_detail_view_article_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@color/white"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:padding="4dp"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+</FrameLayout>

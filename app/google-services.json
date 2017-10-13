@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "721159495230",
+    "firebase_url": "https://notifiertest-57b6b.firebaseio.com",
+    "project_id": "notifiertest-57b6b",
+    "storage_bucket": "notifiertest-57b6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721159495230:android:db2cbcbea82496b3",
+        "android_client_info": {
+          "package_name": "com.floreaacosmin.notifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721159495230-1hn1tharrgu7m9r1s62nlsq4rpap2fms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAym7zricWrCKDjtExVwIsEn1lDxuUYx4I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
