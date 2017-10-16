@@ -57,7 +57,7 @@ public class AppAboutView extends Fragment {
 		articleDateArticlePreview.setText(R.string.about_article_date);
 		articleAuthor = rootView.findViewById(R.id.items_row_layout_item_author);
 		articleAuthor.setText(R.string.about_article_author_name);
-		articleSummary = rootView.findViewById(R.id.items_row_layout_item_summary);
+		articleSummary = rootView.findViewById(R.id.items_row_layout_item_content);
 		articleSummary.setText(R.string.about_article_summary);
 	}
 }

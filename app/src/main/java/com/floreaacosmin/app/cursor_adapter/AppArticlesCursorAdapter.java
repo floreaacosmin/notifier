@@ -36,8 +36,6 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 	private final int rowLayoutTypeBottom = 2;
 
 	private int NOTIFICATION_INTERNAL_ID_INDEX;
-	@SuppressWarnings("FieldCanBeLocal")
-	private int NOTIFICATION_ID_INDEX;
 	private int NOTIFICATION_NAME_INDEX;
 	private int NOTIFICATION_CONTENT_INDEX;
 	private int NOTIFICATION_DATE_INDEX;
@@ -63,14 +61,12 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 		
 		if (newCursor != null) {
 			NOTIFICATION_INTERNAL_ID_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_INTERNAL_ID);
-			NOTIFICATION_ID_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_ID);
 			NOTIFICATION_NAME_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_NAME);
 			NOTIFICATION_CONTENT_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_CONTENT);
 			NOTIFICATION_DATE_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_DATE);
 			NOTIFICATION_AUTHOR_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_AUTHOR);
 			NOTIFICATION_IMAGEURL_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_IMAGEURL);
 			NOTIFICATION_READ_INDEX = newCursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_READ);
-
 		}
 		
 		return super.swapCursor(newCursor);
@@ -92,12 +88,12 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 		// Instantiate the ViewHolder
 		viewHolder = new ViewHolder();
 		// Store the references to the children views
-		viewHolder.articleName = rowView.findViewById(R.id.items_row_layout_item_name);
-		viewHolder.articleSummary = rowView.findViewById(R.id.items_row_layout_item_summary);
-		viewHolder.articleAuthor = rowView.findViewById(R.id.items_row_layout_item_author);
-		viewHolder.articleDate = rowView.findViewById(R.id.items_row_layout_item_date);
-		viewHolder.authorImage = rowView.findViewById(R.id.authors_row_layout_image);
-		viewHolder.articleRead = rowView.findViewById(R.id.items_row_layout_article_read_sign);
+		viewHolder.itemName = rowView.findViewById(R.id.items_row_layout_item_name);
+		viewHolder.itemContent = rowView.findViewById(R.id.items_row_layout_item_content);
+		viewHolder.itemAuthor = rowView.findViewById(R.id.items_row_layout_item_author);
+		viewHolder.itemDate = rowView.findViewById(R.id.items_row_layout_item_date);
+		viewHolder.itemImage = rowView.findViewById(R.id.author_row_layout_image);
+		viewHolder.itemRead = rowView.findViewById(R.id.items_row_layout_item_read_sign);
 		
 		// Store data within the view
 		rowView.setTag(viewHolder);
@@ -113,31 +109,30 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 		viewHolder = (ViewHolder) view.getTag();
 		
 		// The data is taken from the cursor and put it in the views
-		viewHolder.articleName.setText(cursor.getString(NOTIFICATION_NAME_INDEX));
-		viewHolder.articleAuthor.setText(cursor.getString(NOTIFICATION_AUTHOR_INDEX));
+		viewHolder.itemName.setText(cursor.getString(NOTIFICATION_NAME_INDEX));
+		viewHolder.itemAuthor.setText(cursor.getString(NOTIFICATION_AUTHOR_INDEX));
 		
 		// Set the default background resource every time in order to force the refresh of the Image View
-		viewHolder.authorImage.setBackgroundResource(R.drawable.author_background);
-		viewHolder.authorImage.setImageUrl(cursor.getString(NOTIFICATION_IMAGEURL_INDEX),
+		viewHolder.itemImage.setBackgroundResource(R.drawable.author_background);
+		viewHolder.itemImage.setImageUrl(cursor.getString(NOTIFICATION_IMAGEURL_INDEX),
 			((AppBaseApplication) context.getApplicationContext()).getImageLoader());
 		
 		AppAdapterHelper.getInstance().loadArticleSummaryText
-			(viewHolder.articleSummary,	cursor.getString(NOTIFICATION_CONTENT_INDEX));
-		// Set the article date taking into consideration if it was added today or yesterday
-		AppAdapterHelper.getInstance().loadArticleDate
-			(viewHolder.articleDate, cursor, NOTIFICATION_DATE_INDEX, NOTIFICATION_DATE_INDEX); // to do
+			(viewHolder.itemContent,	cursor.getString(NOTIFICATION_CONTENT_INDEX));
+
+		viewHolder.itemDate.setText(cursor.getString(NOTIFICATION_DATE_INDEX));
 
 		int columnArticleInternalIdValue = cursor.getInt(NOTIFICATION_INTERNAL_ID_INDEX);
-		viewHolder.articleName.setTag(columnArticleInternalIdValue);
+		viewHolder.itemName.setTag(columnArticleInternalIdValue);
 		
 		// Get the read value from the cursor to know if the article was opened before or not.
 		int columnArticleReadValue = cursor.getInt(NOTIFICATION_READ_INDEX);
 		// Set the read sign accordingly
 		if (columnArticleReadValue == AppProviderCategoriesContract.UNREAD_VALUE) {
-			viewHolder.articleRead.setBackgroundDrawable
+			viewHolder.itemRead.setBackgroundDrawable
 				((context.getResources().getDrawable(R.drawable.item_unread_sign)));			
 		} else {
-			viewHolder.articleRead.setBackgroundDrawable
+			viewHolder.itemRead.setBackgroundDrawable
 				((context.getResources().getDrawable(R.drawable.item_read_sign)));			
 		}
 		
@@ -179,12 +174,12 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 	/* Stores resource IDs in a in a ViewHolder class to prevent having to look 
 	 * them up each time bindView() is called. */
 	private class ViewHolder {	
-		private TextView articleName;
-		private TextView articleSummary;
-		private TextView articleAuthor;
-		private TextView articleDate;
-		private NetworkImageView authorImage;
-		private View articleRead;
+		private TextView itemName;
+		private TextView itemContent;
+		private TextView itemAuthor;
+		private TextView itemDate;
+		private NetworkImageView itemImage;
+		private View itemRead;
 	}
 	
 	private int getRowLayoutResource(int rowLayoutType) {

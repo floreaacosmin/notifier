@@ -28,8 +28,8 @@ public class AppItemsListViewHelper {
 	private ImageView headerLogo;
 	private TextView headerLogoTitle;
 	private TextView headerDetailText;
-	private ImageView headerCityBackDay;
-	private ImageView  headerCityFrontDay;
+	private ImageView headerImageBack;
+	private ImageView headerImageFront;
 	private View visibleHeaderView;
 	private View hiddenHeaderView;
 	private AccelerateDecelerateInterpolator smoothInterpolator;
@@ -73,8 +73,8 @@ public class AppItemsListViewHelper {
         }
         
         // Instantiate the Visible Buildings Headers 
-        headerCityBackDay = this.fragment.getView().findViewById(R.id.app_items_view_header_hill_back);
-        headerCityFrontDay = this.fragment.getView().findViewById(R.id.app_items_view_header_hill_front);
+        headerImageBack = this.fragment.getView().findViewById(R.id.app_items_view_header_hill_back);
+        headerImageFront = this.fragment.getView().findViewById(R.id.app_items_view_header_hill_front);
         
 		smoothInterpolator = new AccelerateDecelerateInterpolator();
 		int headerHeight = this.fragment.getResources().getDimensionPixelSize(R.dimen.articles_header_height);
@@ -130,7 +130,7 @@ public class AppItemsListViewHelper {
 
         private final CheckBox searchIcon;
 
-        public ListViewOnScrollListener(CheckBox searchIcon) {
+        ListViewOnScrollListener(CheckBox searchIcon) {
             this.searchIcon = searchIcon;
         }
 
@@ -170,8 +170,8 @@ public class AppItemsListViewHelper {
 
 			/* Translate the City Headers ImageViews from bottom (not visible) to top, using different
 			 * ratios so it	creates a volume effect when appearing and disappearing */
-            headerCityBackDay.setTranslationY(Math.max(scrollY, minHeaderTranslation));
-            headerCityFrontDay.setTranslationY(Math.max(scrollY, minHeaderTranslation) / 2);
+            headerImageBack.setTranslationY(Math.max(scrollY, minHeaderTranslation));
+            headerImageFront.setTranslationY(Math.max(scrollY, minHeaderTranslation) / 2);
         }
     }
 }

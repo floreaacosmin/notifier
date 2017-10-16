@@ -63,14 +63,12 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 		// Enabled in order to save the state across different changed (including screen configuration)
 		setRetainInstance(true);
 
-        VelocityListView velocityListView;
-
         /* Setup the search view inside the custom view of the ActionBar. This method must run in
 		 * onResume in order to execute each time the activity is resumed. */
         appItemsSearchView = new AppItemsSearchView(this);
 
 		// Instantiate ListView Object
-		velocityListView = rootView.findViewById(R.id.app_items_view_list_view);
+		VelocityListView velocityListView = rootView.findViewById(R.id.app_items_view_list_view);
 
 		// Method including all the parameterizations for the ListView 
 		new AppItemsListViewHelper(this, velocityListView, appItemsSearchView.getSearchIcon());

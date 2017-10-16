@@ -14,7 +14,7 @@
 		android:id="@+id/items_row_layout_item_name"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/items_row_layout_item_author"
 		android:layout_margin="4dp"
 		android:padding="4dp"
 		android:background="@drawable/cell_shape_default_round_white_blue_margin_subtle"
@@ -24,11 +24,28 @@
 		android:textColor="@color/black"
 		android:textSize="14sp"
 		android:textStyle="bold"
-		android:typeface="sans" />    
+		android:typeface="sans" />
+
+	<!-- Item Author -->
+	<TextView
+		android:id="@id/items_row_layout_item_author"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+		android:layout_margin="4dp"
+		android:padding="4dp"
+		android:background="@drawable/cell_shape_default_round_blue"
+		android:ellipsize="end"
+		android:lines="1"
+		android:text="@string/loading"
+		android:textColor="@color/black"
+		android:textSize="12sp"
+		android:textStyle="normal"
+		android:typeface="sans" />
     
     <!-- Bottom Left side Frame -->
     <RelativeLayout
-        android:id="@+id/items_row_layout_author_image_frame"
+        android:id="@+id/items_row_layout_item_image_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/items_row_layout_item_name"
@@ -37,37 +54,9 @@
 		android:padding="4dp" >
 
 		<include
-		    android:id="@+id/author_picture_layout_frame"
+		    android:id="@+id/item_image_layout_frame"
 		    layout="@layout/author_picture_view" />
 
-       	<!-- Item Date -->
-		<TextView
-			android:id="@+id/items_row_layout_item_date"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/author_picture_layout_frame"
-			android:layout_centerHorizontal="true"
-			android:layout_margin="4dp"
-			android:padding="4dp"
-			android:background="@drawable/cell_shape_default_round_white_blue_margin_subtle"		
-			android:ellipsize="end"
-			android:lines="1"            
-			android:text="@string/item_date"
-			android:textColor="@color/black"
-			android:textSize="12sp"
-			android:textStyle="italic"
-			android:typeface="sans" />
-
-		<!-- Item Read/ Unread Sign -->
-		<View
-			android:id="@+id/items_row_layout_article_read_sign"
-			android:layout_width="20dip"
-            android:layout_height="20dip"
-            android:layout_below="@id/items_row_layout_item_date"
-			android:layout_centerHorizontal="true"
-			android:layout_margin="4dp"
-			android:padding="4dp"
-			android:background="@drawable/item_unread_sign" />
     </RelativeLayout>
 
     <!-- Bottom Right side Frame -->
@@ -75,33 +64,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/items_row_layout_author_image_frame"
+        android:layout_toRightOf="@id/items_row_layout_item_image_frame"
         android:layout_below="@id/items_row_layout_item_name"
         android:padding="2dip" >
 
-        <!-- Item Author -->
-        <TextView
-            android:id="@+id/items_row_layout_item_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="4dp"
-			android:padding="4dp"
-            android:background="@drawable/cell_shape_default_round_blue"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text="@string/loading"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:typeface="sans" />
-
         <!-- Item Summary -->
         <TextView
-            android:id="@+id/items_row_layout_item_summary"
+            android:id="@+id/items_row_layout_item_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-			android:layout_below="@id/items_row_layout_item_author"
 			android:layout_margin="4dp"
             android:padding="4dp"
             android:text="@string/loading"
@@ -112,6 +83,35 @@
             android:lines="3"
             android:gravity="fill"
             android:ellipsize="end" />
+
+        <!-- Item Read/ Unread Sign -->
+        <View
+            android:id="@+id/items_row_layout_item_read_sign"
+            android:layout_width="20dip"
+            android:layout_height="20dip"
+            android:layout_below="@id/items_row_layout_item_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:background="@drawable/item_unread_sign" />
+
+        <!-- Item Date -->
+        <TextView
+            android:id="@+id/items_row_layout_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/items_row_layout_item_read_sign"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:background="@drawable/cell_shape_default_round_white_blue_margin_subtle"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/item_date"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:typeface="sans" />
 
 		<!-- Circle select -->
         <View

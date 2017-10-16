@@ -7,7 +7,7 @@
 
     <!-- Left side Frame -->
     <include
-        android:id="@+id/author_picture_layout_frame"
+        android:id="@+id/item_image_layout_frame"
         layout="@layout/author_picture_view" />
 
     <!-- Right side Frame -->
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/author_picture_layout_frame"
+        android:layout_toRightOf="@id/item_image_layout_frame"
         android:padding="2dip" >
 
         <!-- Author Name -->
