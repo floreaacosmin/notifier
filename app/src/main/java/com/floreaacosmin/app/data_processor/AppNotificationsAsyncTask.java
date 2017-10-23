@@ -76,7 +76,7 @@ public class AppNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
 		Cursor cursor = contentResolver.query(AppProviderURIContract.CONTENT_NOTIFICATIONS_URI, cursorProjection, null, null, null);
 		LogUtils.LOGD(LOG_TAG, String.format(Locale.US, "Found %d local entries, computing merge solution", cursor.getCount()));
 
-		int NOTIFICATION_INTERNAL_ID_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_INTERNAL_ID);
+		// int NOTIFICATION_INTERNAL_ID_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_INTERNAL_ID);
 		int NOTIFICATION_ID_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_ID);
 		int NOTIFICATION_NAME_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_NAME);
 		int NOTIFICATION_CONTENT_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_CONTENT);
@@ -89,7 +89,7 @@ public class AppNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
 		// Find the stale data from the content provider
 		while (cursor.moveToNext()) {
 			// Get the internal article Id from the cursor in order to create later the item Uri
-			notificationInternalId = cursor.getInt(NOTIFICATION_INTERNAL_ID_INDEX);
+			notificationInternalId = cursor.getInt(NOTIFICATION_ID_INDEX);
 
 			// Keep track of how many entries were stored locally
 			numberOfLocalItems++;

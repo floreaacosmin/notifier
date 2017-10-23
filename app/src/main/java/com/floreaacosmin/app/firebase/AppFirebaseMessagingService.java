@@ -4,12 +4,19 @@ import android.content.Context;
 
 import com.floreaacosmin.app.data_processor.AppDataHelper;
 import com.floreaacosmin.app.toolbox.LogUtils;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class AppFirebaseMessagingService extends FirebaseMessagingService {
 
     private final String LOG_TAG = LogUtils.makeLogTag(AppFirebaseMessagingService.class);
+
+    private final String DEFAULT_TOPIC = "all_topics";
+
+    public AppFirebaseMessagingService() {
+        FirebaseMessaging.getInstance().subscribeToTopic(DEFAULT_TOPIC);
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

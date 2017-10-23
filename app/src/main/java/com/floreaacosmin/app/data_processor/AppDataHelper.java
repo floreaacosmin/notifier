@@ -47,9 +47,10 @@ public class AppDataHelper {
 			LogUtils.LOGD(LOG_TAG, "ExecutionException: ", e);
 		}
 
-		final int oneHourInS = 3600;
+		// Set this value in seconds (example: one hour = 3600)
+		final int minimumRefreshInterval = 1;
 		// Set the default never run value by decreasing the current time by 24 hours
-		long neverUpdatedUnixTime = (Calendar.getInstance().getTimeInMillis() / 1000L) - (2 * oneHourInS);
+		long neverUpdatedUnixTime = (Calendar.getInstance().getTimeInMillis() / 1000L) - (2 * minimumRefreshInterval);
 		// Get the last saved run time from preferences
 		lastSavedUpdateUnixTime = getApplicationPreferences(context).getLong
 			(AppDataServiceContract.LAST_RUN_TIME, neverUpdatedUnixTime);
@@ -63,7 +64,7 @@ public class AppDataHelper {
 		 * date becomes unavailable and so the logic is applied. But there can be case in which the 
 		 * function is run but there is no Internet connection, and so the function must be run again 
 		 * until data is downloaded.*/
-    	if (((((Calendar.getInstance().getTimeInMillis() / 1000L) - lastSavedUpdateUnixTime) > oneHourInS) && 
+    	if (((((Calendar.getInstance().getTimeInMillis() / 1000L) - lastSavedUpdateUnixTime) > minimumRefreshInterval) &&
     		!updateFunctionRunning) || isContentEmpty) {
     		
     		// The update function is running
