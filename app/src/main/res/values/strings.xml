@@ -4,7 +4,6 @@
     <!-- In App Strings -->
     <string name="app_name" translatable="false">notifier</string>
 	<string name="actionbar_title" translatable="false">#N</string>
-    <string name="app_motto" translatable="false">hmmmm...</string>
     <string name="app_content_authority" translatable="false">com.floreaacosmin.app</string>
 
 	<string name="item_date" translatable="false">"@unknown"</string>

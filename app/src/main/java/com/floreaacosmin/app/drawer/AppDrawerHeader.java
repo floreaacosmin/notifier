@@ -11,7 +11,7 @@ import com.romainpiel.shimmer.ShimmerTextView;
 
 class AppDrawerHeader {
 
-	public void setupHeaderView(Context context, ListView drawerLv) {
+	void setupHeaderView(Context context, ListView drawerLv) {
         // Instantiate the Drawer ListView Header Layout
 		FrameLayout drawerHeaderView = (FrameLayout) LayoutInflater.from(context).inflate(R.layout.drawer_header_view, drawerLv, false);
         // The Header View must not be active

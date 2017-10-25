@@ -141,7 +141,7 @@ public class AppDataHelper {
 	}
 
     // Set the time the last data update was performed
-    public void setLastUpdateTime(Context context) {
+    void setLastUpdateTime(Context context) {
 		long lastUpdateUnixTime = Calendar.getInstance().getTimeInMillis() / 1000L;
     	getApplicationPreferences(context).edit().putLong(AppDataServiceContract.LAST_RUN_TIME, 
     	lastUpdateUnixTime).apply();

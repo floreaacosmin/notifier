@@ -8,7 +8,8 @@
 	android:paddingBottom="40dp"
     android:orientation="horizontal" >
 
-    <!-- Text Message -->	<TextView
+    <!-- Text Message -->
+	<TextView
 	    android:id="@+id/app_toast_message_layout_text_view"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
@@ -17,6 +18,9 @@
 	    android:drawableLeft="@drawable/item_decor_tags"
 	    android:drawablePadding="4dp"
 	    android:padding="5dp"
-	    android:textColor="@color/black" />
+	    android:textColor="@color/black"
+        android:maxLines="2"
+		android:maxLength="100"
+        android:ellipsize="end" />
 	
 </LinearLayout>
