@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -66,7 +67,16 @@ public class AppDrawerHelper {
         appActionBarDrawerToggle = new AppActionBarDrawerToggle(activity, drawerLayout);
         // Set the drawer toggle as the DrawerListener		
         drawerLayout.setDrawerListener(appActionBarDrawerToggle);
-    }
+
+		// TODO - CONTINUE - method in rest ready but I already have all of them in the cache
+		// and can fetch them from there
+		// adding a section and items into it
+		for (int i = 10; i <= 20; i++) {
+			appDrawerMenuItems.add(appDrawerMenuItems.size(), (new AppDrawerItem("test " + i, R.drawable.icon_about,
+					R.color.transparent)));
+
+		}
+	}
 
     // Drawer Items Click Listener
     private class DrawerListViewOnItemClickListener implements ListView.OnItemClickListener {

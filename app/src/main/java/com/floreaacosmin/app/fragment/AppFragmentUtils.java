@@ -45,7 +45,7 @@ public class AppFragmentUtils {
 						AppProviderContentContract.NOTIFICATIONS_ALL);
 				break;
 
-			case AppDrawerContract.POSITION_FACILITY_POSITION:
+/*			case AppDrawerContract.POSITION_FACILITY_POSITION:
 				fragmentView = new AppItemsView();
 				extraDataBundle = new Bundle();
 				extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_TITLE_KEY,
@@ -53,7 +53,7 @@ public class AppFragmentUtils {
 				extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_FILTER_KEY,
 						AppDBTableColumns.NOTIFICATION_AUTHOR + " = '" +
 								AppProviderCategoriesContract.FACILITY_AUTHOR + "'");
-				break;
+				break;*/
 
 			case AppDrawerContract.POSITION_ABOUT:
 				fragmentView = new AppAboutView();
@@ -63,7 +63,14 @@ public class AppFragmentUtils {
 				fragmentView = new AppItemDetailView();
 				extraDataBundle = new Bundle();
 				extraDataBundle.putParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI, itemUri);
+
 			default:
+                fragmentView = new AppItemsView();
+                extraDataBundle = new Bundle();
+                extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_TITLE_KEY,
+                        "omen notifications");
+                extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_FILTER_KEY,
+                        AppDBTableColumns.NOTIFICATION_AUTHOR + " = 'omen'");
 				break;
 		}
 
