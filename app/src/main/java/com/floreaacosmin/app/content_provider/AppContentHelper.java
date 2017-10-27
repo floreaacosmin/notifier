@@ -29,7 +29,10 @@ class AppContentHelper {
 		// Request to return a single item, # is a placeholder for a numeric parameter (_id of the row in DB)
 		uriMatcher.addURI(authority, AppProviderURIContract.BASE_PATH_NOTIFICATIONS + "/#",
 			AppProviderURIContract.NOTIFICATION_ID);
-		
+		// Request to query after distinct authors
+		uriMatcher.addURI(authority, AppProviderURIContract.BASE_PATH_DISTINCT_AUTHORS,
+				AppProviderURIContract.DISTINCT_AUTHORS);
+
 		return uriMatcher;
 	}
 	
@@ -68,17 +71,19 @@ class AppContentHelper {
         final SelectionBuilder selectionBuilder = new SelectionBuilder();
         
         switch (match) {
-            case AppProviderURIContract.ALL_NOTIFICATIONS: {
+            case AppProviderURIContract.ALL_NOTIFICATIONS:
+            case AppProviderURIContract.DISTINCT_AUTHORS: {
 				// No filters in this case
                 return selectionBuilder.table(AppDBContract.NOTIFICATIONS_TABLE);
             }
+
             case AppProviderURIContract.NOTIFICATION_ID: {
 				// Add the ID to the original query (the ID is the last part of the Uri)
-                final String articleId = uri.getLastPathSegment();
+                final String itemId = uri.getLastPathSegment();
                 return selectionBuilder.table(AppDBContract.NOTIFICATIONS_TABLE)
-                	.where(AppDBTableColumns.NOTIFICATION_INTERNAL_ID + "=?", articleId);
+                	.where(AppDBTableColumns.NOTIFICATION_INTERNAL_ID + "=?", itemId);
             }
-            
+
             default: {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
             }
@@ -94,12 +99,10 @@ class AppContentHelper {
 	        // If no sort order is specified use the default
 	        switch(match) {
 	        	case AppProviderURIContract.ALL_NOTIFICATIONS:
+                case AppProviderURIContract.NOTIFICATION_ID:
 	        		finalSortOrder = AppDBTableColumns.NOTIFICATION_DATE + DESCENDING_ORDER;
 	        		break;
-	        	case AppProviderURIContract.NOTIFICATION_ID:
-	        		finalSortOrder = AppDBTableColumns.NOTIFICATION_DATE + DESCENDING_ORDER;
-	        		break;
-	        		
+
 	        	default:
 	        		throw new UnknownError("Unknown sort order for the Uri match type: " + match);
 	        }

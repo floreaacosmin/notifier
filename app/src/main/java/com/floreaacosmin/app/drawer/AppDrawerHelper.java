@@ -1,15 +1,17 @@
 package com.floreaacosmin.app.drawer;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.floreaacosmin.app.activity.AppMainActivity;
+import com.floreaacosmin.app.data_processor.AppAuthorsAsyncTask;
 import com.floreaacosmin.app.toolbox.LogUtils;
 import com.floreaacosmin.notifier.R;
 
@@ -39,6 +41,17 @@ public class AppDrawerHelper {
         
 		// Instantiate the drawer menu items array
 		appDrawerMenuItems = new AppDrawerItemsList();
+        /* Besides the static menu items, the drawer is populated with categories based on the
+		 * existing retrieved authors from the local cached. */
+        try {
+            List<String> authors = new AppAuthorsAsyncTask(activity).execute().get();
+            for (String author : authors) {
+                appDrawerMenuItems.add(appDrawerMenuItems.size(), (new AppDrawerItem(author,
+                        R.drawable.icon_about, R.color.transparent)));
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
 		
         // Instantiate the ListView Drawer Adapter
         appDrawerListAdapter = new AppDrawerListAdapter(activity, appDrawerMenuItems);
@@ -67,25 +80,20 @@ public class AppDrawerHelper {
         appActionBarDrawerToggle = new AppActionBarDrawerToggle(activity, drawerLayout);
         // Set the drawer toggle as the DrawerListener		
         drawerLayout.setDrawerListener(appActionBarDrawerToggle);
-
-		// TODO - CONTINUE - method in rest ready but I already have all of them in the cache
-		// and can fetch them from there
-		// adding a section and items into it
-		for (int i = 10; i <= 20; i++) {
-			appDrawerMenuItems.add(appDrawerMenuItems.size(), (new AppDrawerItem("test " + i, R.drawable.icon_about,
-					R.color.transparent)));
-
-		}
-	}
+    }
 
     // Drawer Items Click Listener
     private class DrawerListViewOnItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        	LogUtils.LOGD(LOG_TAG, "Selected position in drawer: " + position + ", with the id: " + id);
-        	
-            // Set the selected item in the drawer list adapter, in order to highlight it
-            selectItemInDrawer(position);
+            String drawerItemName = appDrawerMenuItems.get(position - 1).getName();
+
+        	LogUtils.LOGD(LOG_TAG, "Selected position in drawer: " + position + ", with id: " + id +
+                    " and name: " + drawerItemName);
+
+            /* Set the selected item in the drawer list adapter, in order to highlight it. Also this
+             * method contains in it the function to open the respective fragment. */
+            selectItemInDrawer(position, drawerItemName);
         }
     }
 
@@ -104,7 +112,7 @@ public class AppDrawerHelper {
 		}
 	}
 
-    public void selectItemInDrawer(int position) {
+    public void selectItemInDrawer(int position, String drawerItemName) {
     	// An array begins at 0 while the ListView position begins with 1
     	int arrayPosition = position - 1;
     	
@@ -118,7 +126,7 @@ public class AppDrawerHelper {
         drawerListView.setSelection(position);
 
     	// Display view for selected Navigation Drawer Item
-        ((AppMainActivity) activity).getAppFragmentUtils().displaySelectedView(position, null);
+        ((AppMainActivity) activity).getAppFragmentUtils().displaySelectedView(position, null, drawerItemName);
     	
         appDrawerListAdapter.setSelectedItem(arrayPosition);
         // Set the ActionBar title with the Drawer menu item name

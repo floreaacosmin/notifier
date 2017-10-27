@@ -23,9 +23,11 @@ import android.text.TextUtils;
 public class AppContentProvider extends ContentProvider {
 
 	private final String LOG_TAG = LogUtils.makeLogTag(AppContentProvider.class);
-	
+
+    private final String UNKNOWN_URI = "Unknown Uri: ";
+
 	private AppDBHelper appDBHelper;
-	private UriMatcher appUriMatcher;
+	private UriMatcher uriMatcher;
 	private AppContentHelper appContentHelperInstance;
 	
 	@Override
@@ -36,7 +38,7 @@ public class AppContentProvider extends ContentProvider {
 		/* To determine what kinds of URI addresses are passed to the content provider, we can leverage a 
 		 * helper class called UriMatcher to define specific URI patterns the content provider will support.
 		 * Instantiate the UriMatcher Object. */
-		appUriMatcher = appContentHelperInstance.buildUriMatcher();
+		uriMatcher = appContentHelperInstance.buildUriMatcher();
 		
 		appDBHelper = new AppDBHelper(getContext());
 		// Return true only if the DB is created
@@ -47,17 +49,19 @@ public class AppContentProvider extends ContentProvider {
 	 * consuming application how to handle that data. */
 	@Override
 	public String getType(@NonNull Uri uri) {
-        final int uriMatch = appUriMatcher.match(uri);
+        final int uriMatch = uriMatcher.match(uri);
         		
 		switch (uriMatch) {
 			case AppProviderURIContract.ALL_NOTIFICATIONS:
 				// List
 				return AppProviderURIContract.CONTENT_NOTIFICATIONS_LIST_MIME_TYPE;
+
 			case AppProviderURIContract.NOTIFICATION_ID:
 				// Single Item
 				return AppProviderURIContract.CONTENT_NOTIFICATIONS_ITEM_MIME_TYPE;
+
 			default:
-				throw new IllegalArgumentException ("Unknown Uri: " + uri);
+				throw new IllegalArgumentException (UNKNOWN_URI + uri);
 		}
 	}	
 	
@@ -71,25 +75,37 @@ public class AppContentProvider extends ContentProvider {
 		final SQLiteDatabase appDatabase = appDBHelper.getReadableDatabase();
 	    /* The UriMatcher class is used to determine if the query is for a single entry or all 
 	     * entries. If it's a single entry, we add a where clause to filter by just the unique artId. */
-		final int match = appUriMatcher.match(uri);
+		final int match = uriMatcher.match(uri);
 		
-		LogUtils.LOGD(LOG_TAG, "The received uri was: " + uri + ", match: " + match + 
+		LogUtils.LOGD(LOG_TAG, "Query triggered - the received uri was: " + uri + ", match: " + match +
 			", projection: " + Arrays.toString(projection) + ", selection: " + selection + 
 			", arguments: " + Arrays.toString(selectionArgs));
 		
         // All cases are handled with ExpandedSelectionBuilder
         final SelectionBuilder selectionBuilder = appContentHelperInstance.buildExpandedSelection(uri, match);
-        
-		/* We call the query() method of the SQLiteQueryBuilder class. It takes many of the same 
+
+		/* We call the query() method of the SQLiteQueryBuilder class. It takes many of the same
 		 * parameters as were passed to our query() method so we just pass them along. Then we return
 		 * the newly created cursor. */
 	    @SuppressWarnings("UnnecessaryLocalVariable")
-		Cursor cursor = selectionBuilder.where(selection, selectionArgs).query(appDatabase, projection,
-	    	appContentHelperInstance.getSortOrder(match, sortOrder));
-	    
-	    // No need to notify, because this is a query, the data is not updated
-	    
-	    return cursor;
+		Cursor cursor;
+
+		switch (match) {
+            case AppProviderURIContract.ALL_NOTIFICATIONS:
+            case AppProviderURIContract.NOTIFICATION_ID:
+                cursor = selectionBuilder.where(selection, selectionArgs).query(appDatabase, projection,
+                        appContentHelperInstance.getSortOrder(match, sortOrder));
+                break;
+
+			case AppProviderURIContract.DISTINCT_AUTHORS:
+                cursor = appDatabase.rawQuery("SELECT DISTINCT n.notification_author FROM notifications_table n", null);
+                break;
+
+            default:
+                throw new IllegalArgumentException(UNKNOWN_URI + uri);
+		}
+        // No need to notify, because this is a query, the data is not updated
+        return cursor;
 	}
 	
 	@Override
@@ -99,7 +115,7 @@ public class AppContentProvider extends ContentProvider {
 		
 		// Get Database object as a writable database
 		final SQLiteDatabase appDatabase = appDBHelper.getWritableDatabase();
-		final int match = appUriMatcher.match(uri);
+		final int match = uriMatcher.match(uri);
 		long rowInsertedId;
 	   
 	    switch (match) {
@@ -108,7 +124,7 @@ public class AppContentProvider extends ContentProvider {
 	    		break;
 	    	// If none of the above matches than return an exception
 	    	default:
-	    		throw new IllegalArgumentException("Unknown URI: " + uri);
+	    		throw new IllegalArgumentException(UNKNOWN_URI + uri);
 	    }
 	    Uri itemUri = ContentUris.withAppendedId(uri, rowInsertedId);
 	    // Notify all listeners that the change has been performed only if the item was added successfully
@@ -126,7 +142,7 @@ public class AppContentProvider extends ContentProvider {
 		
 		// Get Database object as a writable database
         final SQLiteDatabase appDatabase = appDBHelper.getWritableDatabase();
-        final int match = appUriMatcher.match(uri);
+        final int match = uriMatcher.match(uri);
         int rowsUpdated;
 		String updateId;
 		
@@ -147,7 +163,7 @@ public class AppContentProvider extends ContentProvider {
 	    		}
 	    		break;
 	    	default:
-	    		throw new IllegalArgumentException("Unknown URI: " + uri);
+	    		throw new IllegalArgumentException(UNKNOWN_URI + uri);
 		}
 		// Notify listeners of the performed change
 		if (rowsUpdated > 0) {
@@ -160,7 +176,7 @@ public class AppContentProvider extends ContentProvider {
 	public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
 		// Get Database object as a writable database
 		final SQLiteDatabase appDatabase = appDBHelper.getWritableDatabase();
-		final int match = appUriMatcher.match(uri);
+		final int match = uriMatcher.match(uri);
 		int rowsDeleted;
 		String deleteId;
 		
@@ -181,7 +197,7 @@ public class AppContentProvider extends ContentProvider {
 		 	    }
 		 	    break;
 		 	default:
-		 	   throw new IllegalArgumentException("Unknown URI: " + uri);    
+		 	   throw new IllegalArgumentException(UNKNOWN_URI + uri);
 		 }
 		// Notify listeners of the performed change
 		if (rowsDeleted > 0) {
@@ -194,7 +210,7 @@ public class AppContentProvider extends ContentProvider {
 	public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] allValues) {
 		// Get Database object as a writable database
 		final SQLiteDatabase appDatabase = appDBHelper.getWritableDatabase();		
-		final int match = appUriMatcher.match(uri);
+		final int match = uriMatcher.match(uri);
 		int rowsBulkInserted;
 		
 	    switch (match) {
@@ -204,7 +220,7 @@ public class AppContentProvider extends ContentProvider {
     			break;
     			// If none of the above matches than return an exception
     		default:
-    			throw new IllegalArgumentException("Unknown URI: " + uri);
+    			throw new IllegalArgumentException(UNKNOWN_URI + uri);
 	    }		
 	    
 	    // Notify all listeners that the change has been performed only if the item was added successfully

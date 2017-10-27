@@ -76,7 +76,6 @@ public class AppNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
 		Cursor cursor = contentResolver.query(AppProviderURIContract.CONTENT_NOTIFICATIONS_URI, cursorProjection, null, null, null);
 		LogUtils.LOGD(LOG_TAG, String.format(Locale.US, "Found %d local entries, computing merge solution", cursor.getCount()));
 
-		// int NOTIFICATION_INTERNAL_ID_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_INTERNAL_ID);
 		int NOTIFICATION_ID_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_ID);
 		int NOTIFICATION_NAME_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_NAME);
 		int NOTIFICATION_CONTENT_INDEX = cursor.getColumnIndex(AppDBTableColumns.NOTIFICATION_CONTENT);
@@ -207,8 +206,7 @@ public class AppNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
 	protected void onPostExecute(Void result) {
 		/* Send a notification message through the receiver if there were new items added.
 		 * The check for the items added number is done inside the function. */
-		AppDataHelper.getInstance().sendResultToReceiver
-			(null, numberOfNewItemsInserted);
+		AppDataHelper.getInstance().sendResultToReceiver(null, numberOfNewItemsInserted);
 		// Refresh the list in order to reflect the changes made in the content provider 
 		AppItemsView.refreshArticlesCursorLoader();
 		// Send an notification through the receiver in order to hide the progress bar

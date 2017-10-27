@@ -6,17 +6,15 @@ import java.util.ArrayList;
 
 class AppDrawerItemsList extends ArrayList<AppDrawerItem> {
 
-    public AppDrawerItemsList() {
+    AppDrawerItemsList() {
 
         final String ALL_NOTIFICATIONS = "all notifications";
         final String FACILITY = "facility";
         final String ABOUT = "about";
 
-        add(0, (new AppDrawerItem(ALL_NOTIFICATIONS, R.drawable.icon_all_articles,
+        add(0, (new AppDrawerItem(ALL_NOTIFICATIONS, R.drawable.icon_full_square,
                 R.color.transparent)));
-        add(1, (new AppDrawerItem(FACILITY, R.drawable.icon_selected_articles,
+        add(1, (new AppDrawerItem(ABOUT, R.drawable.icon_empty_square,
                 R.drawable.icon_selected_symbol)));
-        add(2, (new AppDrawerItem(ABOUT, R.drawable.icon_about,
-                R.color.transparent)));
         }
 }

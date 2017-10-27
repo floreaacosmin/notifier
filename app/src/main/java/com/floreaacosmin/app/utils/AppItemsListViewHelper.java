@@ -119,7 +119,7 @@ public class AppItemsListViewHelper {
 				ContentValues itemValues = new ContentValues();
 				itemValues.put(AppDBTableColumns.NOTIFICATION_READ, AppProviderCategoriesContract.READ_VALUE);
 				fragment.getActivity().getContentResolver().update(itemUri, itemValues, null, null);
-				
+
 				// Pass the selected item's Uri to the activity's implemented interface method
 				listItemSelectedCommunicator.onListItemClicked(itemUri);
 			}

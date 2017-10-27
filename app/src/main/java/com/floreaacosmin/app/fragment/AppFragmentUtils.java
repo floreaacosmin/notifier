@@ -28,8 +28,10 @@ public class AppFragmentUtils {
 	private Bundle extraDataBundle;
 	private int fragmentPosition;
 
+    private final String NOTIFICATIONS = " notifications";
+
 	// Display selected fragment view when clicking the Drawer List Item
-	public void displaySelectedView(int position, Uri itemUri) {
+	public void displaySelectedView(int position, Uri itemUri, String drawerItemName) {
 
 		// Save the fragment position
 		fragmentPosition = position;
@@ -45,32 +47,24 @@ public class AppFragmentUtils {
 						AppProviderContentContract.NOTIFICATIONS_ALL);
 				break;
 
-/*			case AppDrawerContract.POSITION_FACILITY_POSITION:
-				fragmentView = new AppItemsView();
-				extraDataBundle = new Bundle();
-				extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_TITLE_KEY,
-						AppProviderContentContract.NOTIFICATIONS_FACILITY);
-				extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_FILTER_KEY,
-						AppDBTableColumns.NOTIFICATION_AUTHOR + " = '" +
-								AppProviderCategoriesContract.FACILITY_AUTHOR + "'");
-				break;*/
-
 			case AppDrawerContract.POSITION_ABOUT:
 				fragmentView = new AppAboutView();
 				break;
 
 			case AppDrawerContract.POSITION_NOTIFICATION_DETAIL:
+                LogUtils.LOGD(LOG_TAG, "The item detail fragment was triggered with this uri: " + itemUri);
 				fragmentView = new AppItemDetailView();
 				extraDataBundle = new Bundle();
 				extraDataBundle.putParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI, itemUri);
+                break;
 
 			default:
                 fragmentView = new AppItemsView();
                 extraDataBundle = new Bundle();
                 extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_TITLE_KEY,
-                        "omen notifications");
+                        drawerItemName + NOTIFICATIONS);
                 extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_FILTER_KEY,
-                        AppDBTableColumns.NOTIFICATION_AUTHOR + " = 'omen'");
+                        AppDBTableColumns.NOTIFICATION_AUTHOR + " = '" + drawerItemName + "'");
 				break;
 		}
 

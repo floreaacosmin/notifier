@@ -20,9 +20,9 @@ import com.floreaacosmin.app.database.AppDBTableColumns;
 import com.floreaacosmin.notifier.R;
 
 @SuppressWarnings("deprecation")
-public class AppArticlesCursorAdapter extends CursorAdapter{
+public class AppItemsCursorAdapter extends CursorAdapter{
 	
-	private final String LOG_TAG = LogUtils.makeLogTag(AppArticlesCursorAdapter.class);
+	private final String LOG_TAG = LogUtils.makeLogTag(AppItemsCursorAdapter.class);
 	
 	private final Context context;
 	private final LayoutInflater layoutInflater;
@@ -43,7 +43,7 @@ public class AppArticlesCursorAdapter extends CursorAdapter{
 	private int NOTIFICATION_IMAGEURL_INDEX;
 	private int NOTIFICATION_READ_INDEX;
 
-	public AppArticlesCursorAdapter(Context c) {
+	public AppItemsCursorAdapter(Context c) {
 		super(c, null, false);
 		
 		// Save received context in a local variable 		

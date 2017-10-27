@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.Cursor;
 
 // AsyncQueryHandler is used for asynchronous database operations above the ContentResolver
-
 public class AppAsyncQueryHandler extends AsyncQueryHandler {
 	
 	public AppAsyncQueryHandler(Context context) {

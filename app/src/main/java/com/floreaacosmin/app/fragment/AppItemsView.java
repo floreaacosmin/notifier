@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.floreaacosmin.app.activity.AppBaseActivity;
-import com.floreaacosmin.app.cursor_adapter.AppArticlesCursorAdapter;
+import com.floreaacosmin.app.cursor_adapter.AppItemsCursorAdapter;
 import com.floreaacosmin.app.content_provider.AppContentProjection;
 import com.floreaacosmin.app.content_provider.AppCursorLoaderContract;
 import com.floreaacosmin.app.content_provider.AppProviderContentContract;
@@ -33,8 +33,8 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
     private final String LOG_TAG = LogUtils.makeLogTag(AppItemsView.class);
     
 	private View rootView;
-	private AppArticlesCursorAdapter appArticlesCursorAdapter;
-	private static Loader<Cursor> appArticlesCursorLoader;
+	private AppItemsCursorAdapter appItemsCursorAdapter;
+	private static Loader<Cursor> appItemsCursorLoader;
     private AppItemsSearchView appItemsSearchView;
 	private String searchFilter;
 	
@@ -74,14 +74,14 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 		new AppItemsListViewHelper(this, velocityListView, appItemsSearchView.getSearchIcon());
 
 		// Set the data adapter for this ListView
-		appArticlesCursorAdapter = new AppArticlesCursorAdapter(this.getActivity());
-		velocityListView.setAdapter(appArticlesCursorAdapter);	
+		appItemsCursorAdapter = new AppItemsCursorAdapter(this.getActivity());
+		velocityListView.setAdapter(appItemsCursorAdapter);
 		
 		/* The LoaderManager class is associated with an Activity or Fragment. Used to manage one 
 		 * or more Loader instances. This helps an application manage longer-running operations in
 		 * conjunction with the Activity or Fragment life cycle; the most common use of this is with
 		 * a CursorLoader. */
-		appArticlesCursorLoader = getLoaderManager().initLoader
+		appItemsCursorLoader = getLoaderManager().initLoader
 			(AppCursorLoaderContract.GLOBAL_LOADER, this.getArguments(), this);
 	}
 
@@ -190,10 +190,10 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		if (loader.getId() == AppCursorLoaderContract.GLOBAL_LOADER) {
-			if (appArticlesCursorAdapter != null && data != null) {
+			if (appItemsCursorAdapter != null && data != null) {
 			    /* Swap the new cursor in. The framework will take care of 
 			     * closing the old cursor once we return. */
-				appArticlesCursorAdapter.swapCursor(data);	
+				appItemsCursorAdapter.swapCursor(data);
 			}	
 		}
 	}
@@ -202,11 +202,11 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		if (loader.getId() == AppCursorLoaderContract.GLOBAL_LOADER) {
-			if (appArticlesCursorAdapter != null) {
+			if (appItemsCursorAdapter != null) {
 			    /* This is called when the last Cursor provided to onLoadFinished() 
 			     * above is about to be closed.  We need to make sure we are no 
 			     * longer using it. */
-				appArticlesCursorAdapter.swapCursor(null);	
+				appItemsCursorAdapter.swapCursor(null);
 			}	
 		}	
 	}
@@ -220,8 +220,8 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 	}
 		
 	public static void refreshArticlesCursorLoader() {
-		if (appArticlesCursorLoader != null) {
-			appArticlesCursorLoader.onContentChanged();
+		if (appItemsCursorLoader != null) {
+			appItemsCursorLoader.onContentChanged();
 		}
 	}
 }

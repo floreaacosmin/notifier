@@ -13,7 +13,10 @@ public class AppContentProjection {
 			AppDBTableColumns.NOTIFICATION_DATE,
 			AppDBTableColumns.NOTIFICATION_AUTHOR,
 			AppDBTableColumns.NOTIFICATION_IMAGEURL,
-			AppDBTableColumns.NOTIFICATION_READ,
+			AppDBTableColumns.NOTIFICATION_READ
+	};
 
+	public static final String[] AUTHORS_PROJECTION = {
+			AppDBTableColumns.NOTIFICATION_AUTHOR
 	};
 }

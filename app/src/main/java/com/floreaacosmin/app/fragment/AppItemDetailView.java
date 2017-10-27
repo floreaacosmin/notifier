@@ -12,20 +12,21 @@ import com.floreaacosmin.app.activity.AppBaseActivity;
 import com.floreaacosmin.app.data_processor.AppAsyncQueryHandler;
 import com.floreaacosmin.app.content_provider.AppContentProjection;
 import com.floreaacosmin.app.content_provider.AppProviderContentContract;
+import com.floreaacosmin.app.toolbox.LogUtils;
 import com.floreaacosmin.notifier.R;
 import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 
 public class AppItemDetailView extends Fragment {
-    
-	public AppItemDetailView(){}
-	
+
 	private View rootView;
 	private Uri itemUri;
 	private ParallaxScrollView parallaxScrollView;
 	@SuppressWarnings("FieldCanBeLocal")
 	private String[] cursorProjection;
 	private AppAsyncQueryHandler appAsyncQueryHandlerInstance;
-	
+
+	private final String LOG_TAG = LogUtils.makeLogTag(AppItemDetailView.class);
+
 	private synchronized AppAsyncQueryHandler getAppAsyncQueryHandler(Context context) {
 		if (appAsyncQueryHandlerInstance == null) {
 			appAsyncQueryHandlerInstance = new AppAsyncQueryHandler(context);			
@@ -38,6 +39,8 @@ public class AppItemDetailView extends Fragment {
 		super.onCreate(savedInstanceState);
 		// Must be set to true so invalidateOptionsMenu() can be called
 		setHasOptionsMenu(true);
+
+		LogUtils.LOGD(LOG_TAG, "Fragment created.");
 	}
 
 	@Override
@@ -73,6 +76,8 @@ public class AppItemDetailView extends Fragment {
 
         // Get the itemUri object from the bundle passed in the fragment from the holder activity 
         itemUri = this.getArguments().getParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI);
+		LogUtils.LOGD(LOG_TAG, "The itemUri is: " + itemUri);
+
 		cursorProjection = AppContentProjection.NOTIFICATIONS_PROJECTION;
 		// Run the cursor query asynchronously
 		getAppAsyncQueryHandler(this.getActivity()).startQuery(AppAsyncQueryHandler.ITEM_DETAIL_QUERY, null, itemUri,
