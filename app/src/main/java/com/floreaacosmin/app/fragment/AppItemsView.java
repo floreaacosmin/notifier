@@ -27,8 +27,6 @@ import com.floreaacosmin.app.utils.AppItemsListViewHelper;
 import com.floreaacosmin.notifier.R;
 
 public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
-    
-    public AppItemsView(){}
 
     private final String LOG_TAG = LogUtils.makeLogTag(AppItemsView.class);
     
@@ -172,13 +170,14 @@ public class AppItemsView extends Fragment implements LoaderCallbacks<Cursor> {
 		    		finalCursorSelection = finalCursorSelection + " AND (" + searchCursorSelection + ")";	
 		    	}
 		    }
-		    
+
 			/* CursorLoader loads data backed by a ContentProvider. The selection arguments string array 
 			 * is always passed to the cursor loader constructor as it does not influence (it is considered 
 			 * extra as there are cases where it is not used at all. */
+			final String sortOrder = AppDBTableColumns.NOTIFICATION_INTERNAL_ID + " ASC";
 		    cursorLoader = new CursorLoader(this.getActivity(), 
 		    	AppProviderURIContract.CONTENT_NOTIFICATIONS_URI, cursorProjection, finalCursorSelection,
-		    	searchCursorSelectionArgs, null);
+		    	searchCursorSelectionArgs, sortOrder);
 		    
 		    return cursorLoader; 
 		} else {

@@ -101,7 +101,7 @@ public class AppDataHelper {
         return sdf.format(date);
 	}
 
-	public void sendResultToReceiver(Object error, int newArticlesAdded) {
+	public void sendResultToReceiver(Object error, int newItemsAdded) {
 		// Send a status through the result receiver in order to display a message to the user			
     	Bundle bundle = new Bundle();
     	if (error != null) {
@@ -109,8 +109,8 @@ public class AppDataHelper {
             	VolleyErrorHelper.getMessage(error));
             AppDataResultInterface.getInstance().send(AppDataServiceContract.STATUS_ERROR, bundle);
     	}
-    	if (newArticlesAdded > 0) {
-    		bundle.putInt(AppDataServiceContract.OPERATION_RESULT_STATUS, newArticlesAdded);
+    	if (newItemsAdded > 0) {
+    		bundle.putInt(AppDataServiceContract.OPERATION_RESULT_STATUS, newItemsAdded);
     		AppDataResultInterface.getInstance().send(AppDataServiceContract.STATUS_NEW_NOTIFICATIONS, bundle);
     	}
 	}

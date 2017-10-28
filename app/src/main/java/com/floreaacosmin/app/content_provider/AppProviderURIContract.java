@@ -37,4 +37,6 @@ public final class AppProviderURIContract {
 	public static final int ALL_NOTIFICATIONS = 10;
 	public static final int NOTIFICATION_ID = 11;
 	public static final int DISTINCT_AUTHORS = 20;
+
+	public static final String UNKNOWN_URI = "Unknown Uri: ";
 }

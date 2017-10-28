@@ -1,7 +1,6 @@
 package com.floreaacosmin.app.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import com.floreaacosmin.app.activity.AppBaseActivity;
 import com.floreaacosmin.app.data_processor.AppAsyncQueryHandler;
 import com.floreaacosmin.app.content_provider.AppContentProjection;
 import com.floreaacosmin.app.content_provider.AppProviderContentContract;
+import com.floreaacosmin.app.database.AppDBTableColumns;
 import com.floreaacosmin.app.toolbox.LogUtils;
 import com.floreaacosmin.notifier.R;
 import com.nirhart.parallaxscroll.views.ParallaxScrollView;
@@ -21,18 +21,8 @@ public class AppItemDetailView extends Fragment {
 	private View rootView;
 	private Uri itemUri;
 	private ParallaxScrollView parallaxScrollView;
-	@SuppressWarnings("FieldCanBeLocal")
-	private String[] cursorProjection;
-	private AppAsyncQueryHandler appAsyncQueryHandlerInstance;
 
 	private final String LOG_TAG = LogUtils.makeLogTag(AppItemDetailView.class);
-
-	private synchronized AppAsyncQueryHandler getAppAsyncQueryHandler(Context context) {
-		if (appAsyncQueryHandlerInstance == null) {
-			appAsyncQueryHandlerInstance = new AppAsyncQueryHandler(context);			
-		}
-		return appAsyncQueryHandlerInstance;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,20 +64,21 @@ public class AppItemDetailView extends Fragment {
 		// Method including all the parameterizations for the ScrollView
 		((AppBaseActivity) this.getActivity()).getAppItemDetailViewHelper().setupDetailView(this, parallaxScrollView);
 
-        // Get the itemUri object from the bundle passed in the fragment from the holder activity 
+        // Get the itemUri object from the bundle passed in the fragment from the holder activity
         itemUri = this.getArguments().getParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI);
 		LogUtils.LOGD(LOG_TAG, "The itemUri is: " + itemUri);
 
-		cursorProjection = AppContentProjection.NOTIFICATIONS_PROJECTION;
+		String[] cursorProjection = AppContentProjection.NOTIFICATIONS_PROJECTION;
 		// Run the cursor query asynchronously
-		getAppAsyncQueryHandler(this.getActivity()).startQuery(AppAsyncQueryHandler.ITEM_DETAIL_QUERY, null, itemUri,
-			cursorProjection, null, null, null);
+		final String sortOrder = AppDBTableColumns.NOTIFICATION_INTERNAL_ID + " ASC";
+		new AppAsyncQueryHandler(this.getActivity()).startQuery(AppAsyncQueryHandler.ITEM_DETAIL_QUERY, null, itemUri,
+			cursorProjection, null, null, sortOrder);
 	}
 
 	@Override
 	public void onPause() {
-
 		super.onPause();
+
 		((AppBaseActivity) this.getActivity()).getAppItemDetailViewHelper().removeGlobalListener();
 	}
 }

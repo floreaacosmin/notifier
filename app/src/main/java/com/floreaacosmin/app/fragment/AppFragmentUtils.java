@@ -7,7 +7,6 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.floreaacosmin.app.content_provider.AppProviderCategoriesContract;
 import com.floreaacosmin.app.content_provider.AppProviderContentContract;
 import com.floreaacosmin.app.database.AppDBTableColumns;
 import com.floreaacosmin.app.toolbox.LogUtils;
@@ -23,15 +22,13 @@ public class AppFragmentUtils {
 	private final String LOG_TAG = LogUtils.makeLogTag(AppFragmentUtils.class);
 
 	private final Activity activity;
-	private Fragment fragmentView;
-	private FragmentManager fragmentManager;
 	private Bundle extraDataBundle;
 	private int fragmentPosition;
 
-    private final String NOTIFICATIONS = " notifications";
-
 	// Display selected fragment view when clicking the Drawer List Item
 	public void displaySelectedView(int position, Uri itemUri, String drawerItemName) {
+        final String NOTIFICATIONS = " notifications";
+        Fragment fragmentView;
 
 		// Save the fragment position
 		fragmentPosition = position;
@@ -47,65 +44,53 @@ public class AppFragmentUtils {
 						AppProviderContentContract.NOTIFICATIONS_ALL);
 				break;
 
-			case AppDrawerContract.POSITION_ABOUT:
-				fragmentView = new AppAboutView();
-				break;
-
-			case AppDrawerContract.POSITION_NOTIFICATION_DETAIL:
-                LogUtils.LOGD(LOG_TAG, "The item detail fragment was triggered with this uri: " + itemUri);
-				fragmentView = new AppItemDetailView();
-				extraDataBundle = new Bundle();
-				extraDataBundle.putParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI, itemUri);
-                break;
-
-			default:
+            default:
                 fragmentView = new AppItemsView();
                 extraDataBundle = new Bundle();
                 extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_TITLE_KEY,
                         drawerItemName + NOTIFICATIONS);
                 extraDataBundle.putString(AppProviderContentContract.NOTIFICATIONS_CASE_FILTER_KEY,
                         AppDBTableColumns.NOTIFICATION_AUTHOR + " = '" + drawerItemName + "'");
-				break;
+                break;
+
+            case AppDrawerContract.POSITION_NOTIFICATION_DETAIL:
+				fragmentView = new AppItemDetailView();
+				extraDataBundle = new Bundle();
+				extraDataBundle.putParcelable(AppProviderContentContract.SELECTED_NOTIFICATION_ITEM_URI, itemUri);
+                break;
+
+            case AppDrawerContract.POSITION_ABOUT:
+                fragmentView = new AppAboutView();
+                break;
 		}
 
-		if (fragmentView != null) {
-			if (extraDataBundle != null) {
-				if (fragmentView.getArguments() == null) {
+		if (fragmentView != null && extraDataBundle != null ) {
+
+                if (fragmentView.getArguments() == null) {
 					fragmentView.setArguments(extraDataBundle);
 				}
-			}
 
-			// Execute any pending transactions before popping the BackStack.
-			getFragmentManager().executePendingTransactions();
-			// Check to see if the fragment is in the back stack at the last position
-			boolean fragmentPopped = getFragmentManager().popBackStackImmediate(getFragmentTag(fragmentView), 0);
-			// Check to see if the fragment exists in the back stack
-			boolean fragmentExists = (getFragmentManager().findFragmentByTag(getFragmentTag(fragmentView)) == null);
-
-			// If the fragment is not in the back stack than create it
-			if (!fragmentPopped && fragmentExists) {
-				// Execute any pending transactions again after the BackStack was popped
-				getFragmentManager().executePendingTransactions();
 				// Creating a fragment transaction
 				FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 				// Replace whatever is in the fragment_container view with this fragment
 				fragmentTransaction.replace(R.id.app_main_view_frame_container, fragmentView, getFragmentTag(fragmentView));
-			    	/* When you remove or replace a fragment and add the transaction to the back stack, 
-			    	 * the fragment that is removed is stopped (not destroyed). If the user navigates back to 
-			    	 * restore the fragment, it restarts. If you do not add the transaction to the back stack, 
-			    	 * then the fragment is destroyed when removed or replaced. To allow the user to navigate 
-			    	 * backward through the fragment transactions, you must call addToBackStack() before you 
-			    	 * commit theFragmentTransaction. With this logic duplicates are avoided. */
-				fragmentTransaction.addToBackStack(getFragmentTag(fragmentView));
+			    /* When you remove or replace a fragment and add the transaction to the back stack,
+			     * the fragment that is removed is stopped (not destroyed). If the user navigates back to
+			     * restore the fragment, it restarts. If you do not add the transaction to the back stack,
+			     * then the fragment is destroyed when removed or replaced. To allow the user to navigate
+			     * backward through the fragment transactions, you must call addToBackStack() before you
+			     * commit theFragmentTransaction. With this logic duplicates are avoided. */
+                LogUtils.LOGD(LOG_TAG, "The fragment bundle when added to stack was: " + fragmentView.getArguments());
+                fragmentTransaction.addToBackStack(getFragmentTag(fragmentView));
 
 				// Commit the transaction
 				fragmentTransaction.commit();
-					/* Execute pending transactions in the fragment manager, so recursive entries 
-					 * to executePendingTransactions are avoided. */
+
+                /* Execute pending transactions in the fragment manager, so recursive entries
+				 * to executePendingTransactions are avoided. */
 				if (getFragmentManager().executePendingTransactions()) {
 					LogUtils.LOGD(LOG_TAG, "There were pending fragment transactions");
 				}
-			}
 
 		} else {
 			// Log the error appeared in creating the fragment
@@ -121,10 +106,7 @@ public class AppFragmentUtils {
 
 	// Getting reference to the FragmentManager
 	private FragmentManager getFragmentManager() {
-		if (fragmentManager == null) {
-			fragmentManager = activity.getFragmentManager();
-		}
-		return fragmentManager;
+		return activity.getFragmentManager();
 	}
 
 	public String getDisplayedFragmentName() {

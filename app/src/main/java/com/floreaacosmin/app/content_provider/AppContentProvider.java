@@ -24,8 +24,6 @@ public class AppContentProvider extends ContentProvider {
 
 	private final String LOG_TAG = LogUtils.makeLogTag(AppContentProvider.class);
 
-    private final String UNKNOWN_URI = "Unknown Uri: ";
-
 	private AppDBHelper appDBHelper;
 	private UriMatcher uriMatcher;
 	private AppContentHelper appContentHelperInstance;
@@ -61,7 +59,7 @@ public class AppContentProvider extends ContentProvider {
 				return AppProviderURIContract.CONTENT_NOTIFICATIONS_ITEM_MIME_TYPE;
 
 			default:
-				throw new IllegalArgumentException (UNKNOWN_URI + uri);
+				throw new IllegalArgumentException (AppProviderURIContract.UNKNOWN_URI + uri);
 		}
 	}	
 	
@@ -102,7 +100,7 @@ public class AppContentProvider extends ContentProvider {
                 break;
 
             default:
-                throw new IllegalArgumentException(UNKNOWN_URI + uri);
+                throw new IllegalArgumentException(AppProviderURIContract.UNKNOWN_URI + uri);
 		}
         // No need to notify, because this is a query, the data is not updated
         return cursor;
@@ -124,7 +122,7 @@ public class AppContentProvider extends ContentProvider {
 	    		break;
 	    	// If none of the above matches than return an exception
 	    	default:
-	    		throw new IllegalArgumentException(UNKNOWN_URI + uri);
+	    		throw new IllegalArgumentException(AppProviderURIContract.UNKNOWN_URI + uri);
 	    }
 	    Uri itemUri = ContentUris.withAppendedId(uri, rowInsertedId);
 	    // Notify all listeners that the change has been performed only if the item was added successfully
@@ -163,7 +161,7 @@ public class AppContentProvider extends ContentProvider {
 	    		}
 	    		break;
 	    	default:
-	    		throw new IllegalArgumentException(UNKNOWN_URI + uri);
+	    		throw new IllegalArgumentException(AppProviderURIContract.UNKNOWN_URI + uri);
 		}
 		// Notify listeners of the performed change
 		if (rowsUpdated > 0) {
@@ -197,7 +195,7 @@ public class AppContentProvider extends ContentProvider {
 		 	    }
 		 	    break;
 		 	default:
-		 	   throw new IllegalArgumentException(UNKNOWN_URI + uri);
+		 	   throw new IllegalArgumentException(AppProviderURIContract.UNKNOWN_URI + uri);
 		 }
 		// Notify listeners of the performed change
 		if (rowsDeleted > 0) {
@@ -220,7 +218,7 @@ public class AppContentProvider extends ContentProvider {
     			break;
     			// If none of the above matches than return an exception
     		default:
-    			throw new IllegalArgumentException(UNKNOWN_URI + uri);
+    			throw new IllegalArgumentException(AppProviderURIContract.UNKNOWN_URI + uri);
 	    }		
 	    
 	    // Notify all listeners that the change has been performed only if the item was added successfully

@@ -30,7 +30,6 @@ public class AppDataResultReceiver extends AppBaseActivity implements AppDataRes
 										AppDataServiceContract.OPERATION_RESULT_STATUS),
 										Gravity.BOTTOM);
 				appToastMessage.showMessage();
-
 				break;
 			
 			case AppDataServiceContract.STATUS_PROGRESS_TOGGLE:
@@ -54,7 +53,6 @@ public class AppDataResultReceiver extends AppBaseActivity implements AppDataRes
 						passedData.getString(AppDataServiceContract.NEW_NOTIFICATION_RECEIVED),
 								Gravity.TOP, Toast.LENGTH_LONG);
                 appToastMessage.showMessage();
-
 				break;
 
 			case AppDataServiceContract.STATUS_NEW_NOTIFICATIONS:
@@ -63,7 +61,8 @@ public class AppDataResultReceiver extends AppBaseActivity implements AppDataRes
 						passedData.getInt(AppDataServiceContract.OPERATION_RESULT_STATUS) + 
 						AppProviderContentContract.NEW_NOTIFICATIONS_ADDED, Gravity.TOP);
 				appToastMessage.showMessage();
-
+				// Update the drawer menu with new items after downloading new content
+				getAppDrawerHelper().updateDrawerMenuItems();
                 break;
 				
 			case AppDataServiceContract.NOTIFICATION_DETAIL_REFRESH:

@@ -113,7 +113,6 @@ public class AppItemDetailViewHelper {
 
 			// Load the HTML content in the WebView
 			AppAdapterHelper.getInstance().loadHtmlContent(itemBody, cursor.getString(NOTIFICATION_CONTENT_INDEX));
-			// AppAdapterHelper.getInstance().loadArticleDate(itemDate, cursor, ARTICLE_DATE_UNIX_INDEX, ARTICLE_DATE_INDEX);
 
 		} catch (Exception e) {
 			LogUtils.LOGD(LOG_TAG, "The caught exception was: ", e);

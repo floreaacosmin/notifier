@@ -5,7 +5,8 @@ class AppVolleyContract {
     }
 
     // URL to fetch content from during a sync
-    public static final String API_URL = "http://10.0.177.253:8080/notifications/all";
+    // public static final String API_URL = "http://10.0.177.253:8080/notifications/all";
+    public static final String API_URL = "http://192.168.10.4:8080/notifications/all";
 
 	/* When working with JSON data in Android, a JSONArray is used to parse JSON which starts with
 	* the array brackets. Arrays in JSON are used to organize a collection of related items. On

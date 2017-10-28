@@ -6,5 +6,4 @@ public final class AppProviderCategoriesContract {
 
 	public static final int READ_VALUE = 1;
 	public static final int UNREAD_VALUE = 0;
-	public static final String FACILITY_AUTHOR = "facility";
 }

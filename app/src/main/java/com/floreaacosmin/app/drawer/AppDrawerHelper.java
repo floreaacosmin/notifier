@@ -19,7 +19,6 @@ public class AppDrawerHelper {
 
 	public AppDrawerHelper(Activity activity){
 		this.activity = activity;
-		setupDrawer();
 	}
 
 	private final String LOG_TAG = LogUtils.makeLogTag(AppDrawerHelper.class);
@@ -37,27 +36,21 @@ public class AppDrawerHelper {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private void setupDrawer() {
+	public void setupDrawer() {
         
 		// Instantiate the drawer menu items array
 		appDrawerMenuItems = new AppDrawerItemsList();
-        /* Besides the static menu items, the drawer is populated with categories based on the
-		 * existing retrieved authors from the local cached. */
-        try {
-            List<String> authors = new AppAuthorsAsyncTask(activity).execute().get();
-            for (String author : authors) {
-                appDrawerMenuItems.add(appDrawerMenuItems.size(), (new AppDrawerItem(author,
-                        R.drawable.icon_about, R.color.transparent)));
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-		
+
         // Instantiate the ListView Drawer Adapter
         appDrawerListAdapter = new AppDrawerListAdapter(activity, appDrawerMenuItems);
         // Instantiate the ListView used in the Drawer Layout
         drawerListView = activity.findViewById(R.id.app_main_view_drawer_list);
-     	
+
+        /* Update the Drawer with dynamic added content. This is placed here besides after
+         * downloading new items, because when the activity is distroyed, the drawer menu
+         * must be setup again. */
+        updateDrawerMenuItems();
+
         // Add the drawer header view to the ListView
         new AppDrawerHeader().setupHeaderView(activity, drawerListView);
         
@@ -80,6 +73,28 @@ public class AppDrawerHelper {
         appActionBarDrawerToggle = new AppActionBarDrawerToggle(activity, drawerLayout);
         // Set the drawer toggle as the DrawerListener		
         drawerLayout.setDrawerListener(appActionBarDrawerToggle);
+    }
+
+    public void updateDrawerMenuItems() {
+        /* Besides the static menu items, the drawer is populated with categories based on the
+		 * existing retrieved authors from the local cached. */
+        try {
+            List<String> authors = new AppAuthorsAsyncTask(activity).execute().get();
+            for (String author : authors) {
+                appDrawerMenuItems.add(appDrawerMenuItems.size(), (new AppDrawerItem(author,
+                        R.drawable.icon_about, R.color.transparent)));
+
+                /* The adapter must notify the ListView when the underlying data has
+                 * changed otherwise an exception is triggered. As this function is called
+                 * from different locations and phases, as a safe measure the adapter is
+                 * checked if it is instantiated first. */
+                if (appDrawerListAdapter != null) {
+                    appDrawerListAdapter.notifyDataSetChanged();
+                }
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     // Drawer Items Click Listener

@@ -75,7 +75,7 @@ public class AppBaseActivity extends Activity {
 		setContentView(R.layout.app_main_view);
 
         // Instantiate and setup for the Navigation Drawer ListView
-        getAppDrawerHelper();
+        getAppDrawerHelper().setupDrawer();
 	}
 
 	// Reaction to the ActionBar menu selection

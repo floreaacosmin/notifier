@@ -85,7 +85,7 @@ class AppContentHelper {
             }
 
             default: {
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                throw new UnsupportedOperationException(AppProviderURIContract.UNKNOWN_URI + uri);
             }
         }
     }

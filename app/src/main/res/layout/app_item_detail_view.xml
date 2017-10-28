@@ -12,6 +12,7 @@
         app:parallax_factor="1.5"
         app:parallax_views_num="2" >
 
+        <!-- A scroll view can host only one direct child, so everything is wrapped in a LinearLayout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,17 +24,22 @@
             <!-- Author about view, including the picture -->
             <include layout="@layout/item_detail_author_about" />
 
-            <!-- Item Content -->
-            <WebView
-                android:id="@+id/app_item_detail_view_article_content"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:background="@color/white"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
                 android:padding="4dp"
-                android:scrollbars="none" />
+                android:background="@drawable/cell_shape_default_round_white" >
+
+                <!-- Item Content -->
+                <WebView
+                    android:id="@+id/app_item_detail_view_article_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:scrollbars="none" />
+            </FrameLayout>
 
         </LinearLayout>
     </com.nirhart.parallaxscroll.views.ParallaxScrollView>

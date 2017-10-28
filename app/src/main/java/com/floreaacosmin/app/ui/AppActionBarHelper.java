@@ -54,6 +54,7 @@ public class AppActionBarHelper {
 	// Return the height of the ActionBar
     public int getActionBarHeight(Activity a) {
     	Theme theme = a.getTheme();
+
     	Resources resources = a.getResources();
     	
         if (actionBarHeight != 0) {
