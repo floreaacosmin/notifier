@@ -6,7 +6,8 @@ class AppVolleyContract {
 
     // URL to fetch content from during a sync
     // public static final String API_URL = "http://10.0.177.253:8080/notifications/all";
-    private static final String API_URL_LOCAL = "http://192.168.10.4:8080";
+    private static final String API_URL_LOCAL_1 = "http://192.168.10.4:8080";
+    private static final String API_URL_LOCAL_2 = "http://192.168.10.12:8080";
     private static final String API_URL_OPENSHIFT = "http://notifier-rest-notifier-db.7e14.starter-us-west-2.openshiftapps.com";
     private static final String API_SUFFIX = "/notifications/all";
 

@@ -22,6 +22,8 @@ public class AppFirebaseMessagingService extends FirebaseMessagingService {
         sent to the application only from the Firebase console(and not from the API). */
         final String DEFAULT_TOPIC = "all_topics";
         FirebaseMessaging.getInstance().subscribeToTopic(DEFAULT_TOPIC);
+
+        LogUtils.LOGD(LOG_TAG, "Firebase initialized");
     }
 
     @Override

@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="D:\my.stuff\dev_workspace\notifier-db\notifier-app\app\build\intermediates\exploded-aar\com.github.castorflex.smoothprogressbar\library\1.0.1-SNAPSHOT\jars\classes.jar"
+        jar="D:\dev_workspace\notifier-app\app\build\intermediates\exploded-aar\com.github.castorflex.smoothprogressbar\library\1.0.1-SNAPSHOT\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.1"
         sha1="18189948ca1bbca4211c909019fe36fb14a5f495">
-        <dex dex="D:\my.stuff\dev_workspace\notifier-db\notifier-app\app\build\intermediates\pre-dexed\debug\com.github.castorflex.smoothprogressbar-library-1.0.1-SNAPSHOT_3dc42a23b9785022c5ebb9280638dce9c13a8606.jar" />
+        <dex dex="D:\dev_workspace\notifier-app\app\build\intermediates\pre-dexed\debug\com.github.castorflex.smoothprogressbar-library-1.0.1-SNAPSHOT_69fc6fe41feae89ef8b7adb3249e4142cf29cb1f.jar" />
     </item>
 
 </items>

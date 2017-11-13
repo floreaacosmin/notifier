@@ -164,7 +164,7 @@ public class AppNotificationsAsyncTask extends AsyncTask<Void, Void, Void> {
             // Get the stored object by the key
             Notification e = allDownloadedNotifications.get(key);
 
-			LogUtils.LOGD(LOG_TAG, "Scheduling item insert: entry_id = " + e.getId());
+			LogUtils.LOGD(LOG_TAG, "Scheduling item insert with id: " + e.getId());
 			
 			batchContentProviderOperation.add(ContentProviderOperation.newInsert
 				(AppProviderURIContract.CONTENT_NOTIFICATIONS_URI)
