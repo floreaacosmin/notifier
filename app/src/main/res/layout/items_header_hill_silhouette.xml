@@ -26,7 +26,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/hill_front_day" />
 
-    <!-- The article view case detail text -->
+    <!-- The item view case detail text -->
     <TextView
         android:id="@+id/app_items_view_header_logo_subtitle"
         android:layout_width="wrap_content"

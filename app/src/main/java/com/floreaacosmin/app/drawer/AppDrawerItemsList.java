@@ -14,6 +14,6 @@ class AppDrawerItemsList extends ArrayList<AppDrawerItem> {
         add(size(), (new AppDrawerItem(ALL_NOTIFICATIONS, R.drawable.icon_full_square,
                 R.color.transparent)));
         add(size(), (new AppDrawerItem(ABOUT, R.drawable.icon_empty_square,
-                R.drawable.icon_selected_symbol)));
+                R.drawable.icon_about_symbol)));
         }
 }

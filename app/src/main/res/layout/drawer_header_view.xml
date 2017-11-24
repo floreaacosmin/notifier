@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/articles_header_height"
-    android:layout_height="@dimen/articles_header_height"
+    android:layout_width="@dimen/items_header_height"
+    android:layout_height="@dimen/items_header_height"
     android:layout_gravity="center_horizontal"
     android:drawingCacheQuality="high"
     android:fadingEdge="vertical"

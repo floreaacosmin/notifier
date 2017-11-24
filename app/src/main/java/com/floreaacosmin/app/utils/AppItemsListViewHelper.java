@@ -77,7 +77,7 @@ public class AppItemsListViewHelper {
         headerImageFront = this.fragment.getView().findViewById(R.id.app_items_view_header_hill_front);
         
 		smoothInterpolator = new AccelerateDecelerateInterpolator();
-		int headerHeight = this.fragment.getResources().getDimensionPixelSize(R.dimen.articles_header_height);
+		int headerHeight = this.fragment.getResources().getDimensionPixelSize(R.dimen.items_header_height);
 		minHeaderTranslation = -headerHeight + AppActionBarHelper.getInstance().getActionBarHeight(this.fragment.getActivity());
 
 		// Instantiate the ActionBar Icon

@@ -1,9 +1,12 @@
 <resources>
 
-    <dimen name="articles_header_height">250dp</dimen>
+    <dimen name="items_header_height">250dp</dimen>
     <dimen name="authors_header_height_third">100dp</dimen>
     <dimen name="authors_header_height_quarter">50dp</dimen>
-    
+
+    <dimen name="items_header_logo_width">40dp</dimen>
+    <dimen name="items_header_logo_height">160dp</dimen>
+
 	<dimen name="listview_fade_length">70dp</dimen>
 
 </resources>

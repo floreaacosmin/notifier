@@ -10,5 +10,14 @@
         sha1="18189948ca1bbca4211c909019fe36fb14a5f495">
         <dex dex="D:\dev_workspace\notifier-app\app\build\intermediates\pre-dexed\debug\com.github.castorflex.smoothprogressbar-library-1.0.1-SNAPSHOT_69fc6fe41feae89ef8b7adb3249e4142cf29cb1f.jar" />
     </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\cosmin\.android\build-cache\c26c092c36689d8ed49bcee5783814bb829f3e50\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="18c0003f95dfcaa1810aca4d3fdbf188537849a8">
+        <dex dex="D:\dev_workspace\notifier-app\app\build\intermediates\pre-dexed\debug\classes_6ddb9eef00d194359cc9ef25f1b3ed707be43c8b.jar" />
+    </item>
 
 </items>

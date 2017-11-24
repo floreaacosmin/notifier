@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/app_item_detail_view_header"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/articles_header_height"
+    android:layout_height="@dimen/items_header_height"
     android:background="@drawable/background_shadow"
     android:drawingCacheQuality="high"
     android:fadingEdge="vertical"

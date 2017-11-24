@@ -30,7 +30,7 @@
         <FrameLayout
             android:id="@+id/app_items_view_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/articles_header_height"
+            android:layout_height="@dimen/items_header_height"
             android:background="@drawable/background_shadow"
             android:drawingCacheQuality="high"
             android:fadingEdge="vertical"
@@ -47,12 +47,12 @@
 
                 <ImageView
                     android:id="@+id/app_items_view_header_logo"
-                    android:layout_width="@dimen/authors_header_height_third"
-                    android:layout_height="@dimen/authors_header_height_third"
+                    android:layout_width="@dimen/items_header_logo_width"
+                    android:layout_height="@dimen/items_header_logo_height"
                     android:layout_gravity="center_vertical|left"
                     android:layout_weight="1"
                     android:contentDescription="@null"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/app_logo" />
 

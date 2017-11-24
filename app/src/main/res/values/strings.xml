@@ -20,23 +20,23 @@
 	<string name="drawer_close" translatable="false">close navigation drawer</string>
     
     <!-- About View -->
-	<string name="about_first_line" translatable="false">what we do?</string>
+	<string name="about_first_line" translatable="false">"?"</string>
 	<string name="about_second_line" translatable="false">"it's simple :)"</string>	
-	<string name="about_third_line" translatable="false">takes the best journalists</string>
-	<string name="about_forth_line" translatable="false">with the most interesting high value texts</string>
-	<string name="about_fifth_line" translatable="false">and puts them together to bring light into the world around you</string>
+	<string name="about_third_line" translatable="false">takes all BEX notifications</string>
+	<string name="about_forth_line" translatable="false">and pushes them directly to your phone</string>
+	<string name="about_fifth_line" translatable="false">"you will stay up to date with everything that's happening"</string>
 	<string name="about_seventh_line" translatable="false">"thank you, and we're listening at"</string>
-	<string name="about_eighth_line" translatable="false">rate us on</string>
 	<string name="email_address" translatable="false">we@will.see</string>
 
 	<!-- Item About View -->
-	<string name="about_article_author_name" translatable="false">Keyser Soze</string>
-	<string name="about_article_name" translatable="false">Thruth Revolution</string>
-	<string name="about_article_date" translatable="false">16Aug1995</string>
+	<string name="about_article_author_name" translatable="false">"Jerry Maguire"</string>
+	<string name="about_article_name" translatable="false">"show me the moneyyy!!!"</string>
+	<string name="about_article_date" translatable="false">13Dec1996</string>
 	<string name="about_article_summary" translatable="false">
-		"Don't let my bias be a fool. Perhaps it's not THE best movie ever, but it's one that I never get
-		tired of. A great, gritty script, beautifully-acted characters, and what many have called the greatest
-		movie ending of	all time. After you see the ending, and the truth hits you like a ton of bricks..."
+		"I'll tell you why you don't have your $ million. You play for the money. You play with your head,
+        not your heart. When you get on the field, it's all about what you didn't get. Who's to blame. Who's
+        got the contract you didn't get. That is not what inspires people! Shut up! Play the game from your
+        heart. Then I'll show you the kwan. And that's the truth!"
 	</string>
 
 </resources>
