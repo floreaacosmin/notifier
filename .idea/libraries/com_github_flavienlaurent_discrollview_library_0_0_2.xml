@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.flavienlaurent.discrollview:library-0.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-0.0.2.aar/456174625631fe6fdbc121602203d6cd/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/library-0.0.2.aar/456174625631fe6fdbc121602203d6cd/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.flavienlaurent.discrollview/library/0.0.2/35084d06b555559720c51a49243961be9e40a630/library-0.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
