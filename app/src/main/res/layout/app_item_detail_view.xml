@@ -8,8 +8,7 @@
         android:id="@+id/app_item_detail_view_parallax_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:inner_parallax_factor="1.5"
-        app:parallax_factor="1.5"
+        app:inner_parallax_factor="1.9"
         app:parallax_views_num="2" >
 
         <!-- A scroll view can host only one direct child, so everything is wrapped in a LinearLayout -->
